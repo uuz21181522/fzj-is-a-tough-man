@@ -788,16 +788,14 @@ def simulate():
         
     #print [FA.get_value().mean(), mean_rews.mean(), KLA.get_value().mean(), pA.get_value().mean(), KLhA.get_value().mean()]
 
-    log_act=numpy.empty(shape=[0, 1])
-    log_obs=numpy.empty(shape=[0, 1])
-    log_rews = numpy.empty(shape=[0, 1])
 
     # Sample first actions
     [act, op_rew, oFET, otmu, otsig, oot, stmu, stsig, ost, prior_stmu, prior_stsig] = step_agent(obs, rews)
 
-    log_act = numpy.append(log_act, act, axis=0)
-    log_obs = numpy.append(log_obs, obs, axis=0)
-    log_rews = numpy.append(log_rews, rews, axis=0)
+    log_act = [act]
+    log_obs = [obs]
+    log_rews = [rews]
+
 
     timestep = 0
     
@@ -831,9 +829,9 @@ def simulate():
         # Sample new actions  
         [act, op_rew, oFEt, otmu, otsig, oot, stmu, stsig, ost, prior_stmu, prior_stsig] = step_agent(obs, rews)
 
-        log_act = numpy.append(log_act, act, axis=0)
-        log_obs = numpy.append(log_obs, obs, axis=0)
-        log_rews = numpy.append(log_rews, rews, axis=0)
+        log_act = numpy.append(log_act, [act], axis=0)
+        log_obs = numpy.append(log_obs, [obs], axis=0)
+        log_rews = numpy.append(log_rews, [rews], axis=0)
 
         full_otmu[timestep] = otmu
         full_otsig[timestep] = otsig
