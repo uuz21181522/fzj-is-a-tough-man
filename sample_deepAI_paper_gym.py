@@ -819,6 +819,9 @@ def simulate():
                 rews[i,0,0] = rew
                 dones[i] = done
 
+                print 'rew'
+                print rew
+
                 mean_rews[i] = mean_rews[i] + rew
                 
                 if done:
@@ -845,7 +848,7 @@ def simulate():
         full_prior_stsig[timestep] = prior_stsig
     
         timestep = timestep + 1
-        print 'timestep: %d' % timestep
+        #print 'timestep: %d' % timestep
     
     oFA = FA.get_value().mean()
     omean_rews = mean_rews.mean()
@@ -900,6 +903,8 @@ evaluate_FA()
 print 'Running'
 full_otmu, full_otsig, full_ot, full_stmu, full_stsig, full_st, full_prior_stmu, full_prior_stsig = simulate()
 
+print [full_otmu, full_otsig, full_ot, full_stmu, full_stsig, full_st, full_prior_stmu, full_prior_stsig]
+"""
 plt.plot(full_otmu[:,0,0,0],label  ='otmu')
 plt.plot(full_otsig[:,0,0,0],label  ='otsig')
 plt.plot(full_ot[:,0,0,0],label  ='ot')
@@ -927,10 +932,13 @@ plt.plot(full_prior_stsig[:,0,:,0],label  ='prior_stsig')
 #plt.plot(full_st[:,0,1,0],label  ='st2')
 plt.legend()
 plt.show()
+"""
 
 print 'Sampling:'
 obs, ootmu, ootsig = do_sampling(200)
-    
+print [obs, ootmu, ootsig]
+
+"""
 #plt.subplot(224)
 plt.plot(obs[:,:10,0,0],label = 'cart pos') 
 plt.plot(obs[:,0,1,0],label = 'cart vel')
@@ -975,4 +983,4 @@ fig.subplots_adjust(left=0.1, bottom=0.1, right=0.95, top=0.95,
 fig.savefig('fig_openai_mountaincar.pdf')
 
 plt.show()
-
+"""
